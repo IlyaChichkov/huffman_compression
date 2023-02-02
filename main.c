@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
         printf("Error with arguments\n");
         return 1;
     }
+
     printf("Program started...\n");
     FILE* fp, * fp2, * fp3;                       //указатели на файлы
     fp = fopen(argv[1], "rb");      //открываем конкретный файл
@@ -23,11 +24,11 @@ int main(int argc, char* argv[])
     int uniqueSymbolsCount = 0;                 // счётчик количества различных букв, уникальных символов
     int symbolsCount = 0;                       // счётчик количества всех знаков в файле
     int uniqueSymbolsArray[256] = { 0 };        // инициализируем массив количества уникальных символов
-    symbol symbols[256] = {0 };                 // инициализируем массив записей
+    symbol symbols[256] = { 0 };                // инициализируем массив записей
     symbol* psym[256];                          // инициализируем массив указателей на записи
     int fsize2 = 0;                             // счётчик количества символов из 0 и 1 в промежуточном файле temp
+
     //Обработка ошибок чтения файла
-   
     if (fp == NULL)
     {
         puts("File not open");
@@ -37,12 +38,22 @@ int main(int argc, char* argv[])
     reading_from_file(fp, symbols, uniqueSymbolsArray, &symbolsCount, &uniqueSymbolsCount);  //Эту функцию опишите самостоятельно
 
     // Расчёт частоты встречаемости
-    // Тут будет ваш код
+    for (int j = 0; j < uniqueSymbolsCount; ++j) {
+        printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch, symbols[j].freq);
+        symbols[j].freq = symbols[j].freq / symbolsCount;
+        printf("New Freq = %f\n", symbols[j].freq);
+    }
+
+    printf("symbolsCount: %d\n", symbolsCount);
+    printf("uniqueSymbolsCount: %d\n", uniqueSymbolsCount);
+
+    double entropy = entropy_count(symbols, &uniqueSymbolsCount);
+    printf("entropy: %f\n", entropy);
 
     //В массив указателей psym заносим адреса записей
     // Тут будет ваш код (Пока не обязательно)
 
-    //Сортировка по убыванию по частоте 
+    // Сортировка по убыванию по частоте
     // Тут будет ваш код
 
 
