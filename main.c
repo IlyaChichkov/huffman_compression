@@ -55,7 +55,12 @@ int main(int argc, char* argv[])
 
     // Сортировка по убыванию по частоте
     // Тут будет ваш код
+    sortSymbolsByFreq(symbols, uniqueSymbolsCount);
 
+    for (int j = 0; j < uniqueSymbolsCount; ++j) {
+        printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch, symbols[j].freq);
+        printf("New Freq = %f\n", symbols[j].freq);
+    }
 
     //symbol* root = makeTree(psym, uniqueSymbolsCount);//вызов функции создания дерева Хаффмана
     //makeCodes(root);//вызов функции получения кода
