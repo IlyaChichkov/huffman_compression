@@ -7,6 +7,17 @@ void reading_from_file(FILE *fp, symbol *symbols, int *uniqueSymbolsArray, int *
     int sym;
     while (1) {
         sym = fgetc(fp);
+
+        if (sym == EOF) {
+            if (feof(fp) != 0) {
+                printf("\nReading finished.\n");
+                break;
+            } else {
+                printf("\nError while reading file!\n");
+                break;
+            }
+        }
+
         ++*kk; // счетчик знаков в файле;
         ++*k; // счетчик уникальных символов
 
@@ -35,16 +46,6 @@ void reading_from_file(FILE *fp, symbol *symbols, int *uniqueSymbolsArray, int *
                 uniqueSymbolsArray[*k - 1] = sym;
                 symbols[*k - 1].ch = sym;
                 symbols[*k - 1].freq = 1.0f;
-            }
-        }
-
-        if (sym == EOF) {
-            if (feof(fp) != 0) {
-                printf("\nReading finished.\n");
-                break;
-            } else {
-                printf("\nError while reading file!\n");
-                break;
             }
         }
 
