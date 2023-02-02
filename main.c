@@ -50,22 +50,24 @@ int main(int argc, char* argv[])
     double entropy = entropy_count(symbols, &uniqueSymbolsCount);
     printf("entropy: %f\n", entropy);
 
-    //В массив указателей psym заносим адреса записей
-    // Тут будет ваш код (Пока не обязательно)
+    // В массив указателей psym заносим адреса записей
+    for (int j = 0; j < uniqueSymbolsCount; ++j) {
+        *psym = &symbols[j];
+    }
 
     // Сортировка по убыванию по частоте
     // Тут будет ваш код
     sortSymbolsByFreq(symbols, uniqueSymbolsCount);
 
     for (int j = 0; j < uniqueSymbolsCount; ++j) {
-        printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch, symbols[j].freq);
-        printf("New Freq = %f\n", symbols[j].freq);
+        //printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch, symbols[j].freq);
+        //printf("New Freq = %f\n", symbols[j].freq);
     }
 
-    //symbol* root = makeTree(psym, uniqueSymbolsCount);//вызов функции создания дерева Хаффмана
+    symbol* root = makeTree(psym, uniqueSymbolsCount); //вызов функции создания дерева Хаффмана
     //makeCodes(root);//вызов функции получения кода
 
-    rewind(fp);//возвращаем указатель в файле в начало файла
+    rewind(fp); //возвращаем указатель в файле в начало файла
     //в цикле читаем исходный файл, и записываем полученные в функциях коды в промежуточный файл
     while ((chh = fgetc(fp)) != EOF)
     {
