@@ -12,12 +12,11 @@ double entropy_count(symbol* symbols, int* k)
 
 double bcost(int *fsize_2, double file_length)
 {
-    // Unclear input args
     /*
     double cost = 0;
     for (int j = 0; j < file_length; ++j) {
         cost += symbols[j].freq * file_length);
     }
-    return -cost;
+    return cost;
      */
 }

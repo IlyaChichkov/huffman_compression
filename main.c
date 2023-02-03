@@ -39,16 +39,8 @@ int main(int argc, char* argv[])
 
     // Расчёт частоты встречаемости
     for (int j = 0; j < uniqueSymbolsCount; ++j) {
-        printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch, symbols[j].freq);
         symbols[j].freq = symbols[j].freq / symbolsCount;
-        printf("New Freq = %f\n", symbols[j].freq);
     }
-
-    printf("symbolsCount: %d\n", symbolsCount);
-    printf("uniqueSymbolsCount: %d\n", uniqueSymbolsCount);
-
-    double entropy = entropy_count(symbols, &uniqueSymbolsCount);
-    printf("entropy: %f\n", entropy);
 
     // В массив указателей psym заносим адреса записей
     for (int j = 0; j < uniqueSymbolsCount; ++j) {
@@ -62,21 +54,28 @@ int main(int argc, char* argv[])
 
     makeCodes(root);//вызов функции получения кода
 
-    printf("\n --show root-- \n");
-    showRoot(root, 0);
+    //showRoot(root, 0);
 
     rewind(fp); //возвращаем указатель в файле в начало файла
     //в цикле читаем исходный файл, и записываем полученные в функциях коды в промежуточный файл
     while ((chh = fgetc(fp)) != EOF)
     {
-        for (int i = 0; i < uniqueSymbolsCount; i++)
-            if (chh == symbols[i].ch)
+        for (int i = 0; i < uniqueSymbolsCount; i++){
+            if (chh == symbols[i].ch){
                 fputs(symbols[i].code, fp2);
+                for (int j = 0; j < 255; ++j) {
+                    if(symbols[i].code[j] != '\0'){
+                        fsize2++;
+                    }
+                }
+                break;
+            }
+        }
     }
     fclose(fp2);
 
-    //writing_to_file(fp2, fp3, symbols, uniqueSymbolsArray, &symbolsCount, &uniqueSymbolsCount, &fsize2);  //Эту функцию опишите самостоятельно
-    //set_information(symbols, &uniqueSymbolsCount, &symbolsCount, &fsize2);
+    writing_to_file(fp2, fp3, symbols, uniqueSymbolsArray, &symbolsCount, &uniqueSymbolsCount, &fsize2);  //Эту функцию опишите самостоятельно
+    set_information(symbols, &uniqueSymbolsCount, &symbolsCount, &fsize2);
    
     fclose(fp);
     fclose(fp3);
