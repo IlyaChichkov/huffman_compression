@@ -3,5 +3,6 @@
 int compareFreq( const void*, const void*);
 symbol* sortSymbolsByFreq(symbol*, int);
 symbol* makeTree(symbol**, int);
-void makeCodes(symbol*);  
+void makeCodes(symbol*);
+void showRoot(symbol*, int);
 #endif

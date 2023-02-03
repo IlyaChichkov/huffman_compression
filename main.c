@@ -53,22 +53,17 @@ int main(int argc, char* argv[])
     // В массив указателей psym заносим адреса записей
     for (int j = 0; j < uniqueSymbolsCount; ++j) {
         psym[j] = &symbols[j];
-        printf("Symbol[%d]: %c, ", j,  (*psym[j]).ch);
     }
 
     // Сортировка по убыванию по частоте
-    // Тут будет ваш код
-    sortSymbolsByFreq(symbols, uniqueSymbolsCount);
-
-    /*
-    for (int j = 0; j < uniqueSymbolsCount; ++j) {
-        printf("Symbol[%d]: %c, Freq = %f, ", j, symbols[j].ch);
-        printf("New Freq = %f\n", symbols[j].freq);
-    }*/
+    //sortSymbolsByFreq(symbols, uniqueSymbolsCount);
 
     symbol* root = makeTree(psym, uniqueSymbolsCount); //вызов функции создания дерева Хаффмана
 
-    //makeCodes(root);//вызов функции получения кода
+    // makeCodes(root);//вызов функции получения кода
+
+    printf("\n --show root-- \n");
+    showRoot(root, 0);
 
     rewind(fp); //возвращаем указатель в файле в начало файла
     //в цикле читаем исходный файл, и записываем полученные в функциях коды в промежуточный файл
@@ -85,6 +80,6 @@ int main(int argc, char* argv[])
    
     fclose(fp);
     fclose(fp3);
-    printf("Program ended.\n");
+    printf("\nProgram ended.\n");
     return 0;
 }
