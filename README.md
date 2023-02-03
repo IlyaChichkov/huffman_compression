@@ -1,16 +1,23 @@
-# Archiver
+# Huffman compression
 
-Программа архиватор
+## Overview
 
-Порядок работы программы
+Program for compressing of the given file information in to archive file using Huffman algorithm. 
 
-1. Открытие и чтение файла
-2. Расчёт частоты встречаемости символов
-3. Сортировка массива символов по частоте по убыванию
-4. Создание дерева Хаффмана
-5. Создание кодов Хаффмана
-6. Создание промежуточного файла, состоящего из 0 и 1 – закодированный полученным кодом первый файл
-7. Запись полученной последовательности в архивный файл
+## Program workflow
 
-Вам необходимо дописать пропущенные участки кода 
-Желаю успеха! 
+1. Opening and reading file by given path in program arguments
+2. Computing of symbols' occurring frequency
+3. Sorting symbols array by frequency
+4. Creating Huffman tree
+5. Creating Huffman codes
+6. Writing intermediate file with Huffman code
+7. Creating of archive file
+
+## Author
+
+Github - @[Ilya Chichkov](https://github.com/IlyaChichkov)
+
+Email - [ilya.chichkov.dev@gmail.com](mailto:https://github.com/IlyaChichkov)
+
+The basis educational repository by [@SergeyBalabaev](https://github.com/SergeyBalabaev)
