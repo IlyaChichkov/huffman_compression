@@ -43,9 +43,7 @@ symbol* makeTree(symbol** psym, int k)
     // сортировка
     sortSymbolPointersByFreq(psym, k);
 
-    printf("\n > k: [%d]", k);
     if(k == 1) {
-        printf("End");
         return *psym;
     }
 
@@ -85,7 +83,6 @@ void showRoot(symbol* root, int layer){
 
 void makeCodes(symbol* root)
 {
-
     if(root->left != NULL){
         for (int i = 0; i < 255; ++i) {
             if(root->code[i] == '\0'){
