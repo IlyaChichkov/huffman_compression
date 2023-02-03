@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "types.h"
+#include <math.h>
+#include <string.h>
 
 void reading_from_file(FILE *fp, symbol *symbols, int *uniqueSymbolsArray, int *kk, int *k) {
     // если в текущем массиве уникальных символов есть текущий символ - пропускаем, если нет - добавляем и увеличиваем счетчик
@@ -10,10 +12,10 @@ void reading_from_file(FILE *fp, symbol *symbols, int *uniqueSymbolsArray, int *
 
         if (sym == EOF) {
             if (feof(fp) != 0) {
-                printf("\nReading finished.\n");
+                printf("\n> Reading finished.\n");
                 break;
             } else {
-                printf("\nError while reading file!\n");
+                printf("\n> Error while reading file!\n");
                 break;
             }
         }
@@ -53,7 +55,39 @@ void reading_from_file(FILE *fp, symbol *symbols, int *uniqueSymbolsArray, int *
     }
 }
 
+
+char getCharFromByte(char* byte) {
+    int val = 0;
+
+    for (int i = 7; i >= 0; i--) {
+        if(byte[i] == '1')
+            val += pow(2, 7 - i);
+    }
+    return val;
+}
+
 void writing_to_file(FILE *fp2, FILE *fp3, symbol *simbols, int *kolvo, int *kk, int *k, int *fsize2) {
-    // :)
+    fp2 = fopen("temp.txt", "rb");
+    rewind(fp2);
+    int chh;
+    char byte[7];
+
+    float bytesCount = (float)(*fsize2) / 8;
+    bytesCount = ceilf(bytesCount);
+
+    for (int i = 0; i < bytesCount; ++i) {
+        memset(byte, 0, 8);
+        for (int j = 0; j < 8; ++j) {
+            chh = fgetc(fp2);
+            if(chh == EOF){
+                byte[j] = '0';
+            }else{
+                byte[j] = chh;
+            }
+        }
+        char newSym = getCharFromByte(byte);
+        fputc(newSym, fp3);
+    }
+    fclose(fp2);
 }
 
