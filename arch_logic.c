@@ -85,6 +85,26 @@ void showRoot(symbol* root, int layer){
 
 void makeCodes(symbol* root)
 {
-    //
+
+    if(root->left != NULL){
+        for (int i = 0; i < 255; ++i) {
+            if(root->code[i] == '\0'){
+                root->left->code[i] = '0';
+                break;
+            }
+            root->left->code[i] = root->code[i];
+        }
+        makeCodes(root->left);
+    }
+    if(root->right != NULL){
+        for (int i = 0; i < 255; ++i) {
+            if(root->code[i] == '\0'){
+                root->right->code[i] = '1';
+                break;
+            }
+            root->right->code[i] = root->code[i];
+        }
+        makeCodes(root->right);
+    }
 }
 

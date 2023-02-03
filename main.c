@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 
     symbol* root = makeTree(psym, uniqueSymbolsCount); //вызов функции создания дерева Хаффмана
 
-    // makeCodes(root);//вызов функции получения кода
+    makeCodes(root);//вызов функции получения кода
 
     printf("\n --show root-- \n");
     showRoot(root, 0);
